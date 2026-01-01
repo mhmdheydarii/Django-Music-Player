@@ -6,11 +6,15 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 # Create your views here.
 
 
-class IndexView(ListView):
-    model = Singer
+class IndexView(TemplateView):
+
     template_name = 'index.html'
-    context_object_name = 'singers'
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['musics'] = Music.objects.filter(status=True)[:6]
+        context['singers'] = Singer.objects.all()[:7]
+        return context
 
 class SingerMusicsView(ListView):
     model = Singer
