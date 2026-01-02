@@ -1,20 +1,33 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic import TemplateView, ListView, DetailView, FormView
 from .models import Music, Singer
 from django.shortcuts import get_object_or_404
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from .forms import ContactForm
+from django.urls import reverse_lazy
+from django.contrib import messages
 # Create your views here.
 
 
-class IndexView(TemplateView):
+class IndexView(FormView):
 
+    form_class = ContactForm
     template_name = 'index.html'
+    success_url = reverse_lazy('music:index')
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['musics'] = Music.objects.filter(status=True)[:6]
         context['singers'] = Singer.objects.all()[:7]
         return context
+    
+    def form_valid(self, form):
+        try:
+            form.save()
+            messages.success(self.request, 'Your message has been sent successfully')
+        except Exception:
+            messages.error(self.request, 'Somthing went wrong. Please try again')
+        return super().form_valid(form)
+        
 
 class SingerMusicsView(ListView):
     model = Singer
@@ -40,7 +53,4 @@ class BlogView(TemplateView):
     template_name = 'blog.html'
 
 
-class ContactView(TemplateView):
-
-    template_name = 'contact.html'
 
