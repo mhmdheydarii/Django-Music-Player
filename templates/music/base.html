@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MusicVerse - Homepage</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo"><a href="{{ redirect_to_url }}">MusicVerse</a></div>
+            <ul>
+                {% if not request.user.is_authenticated %}
+                <li><a href="{% url 'accounts:login' %}">Login/SignUp</a></li>
+                <a href=""></a>
+                {% else %}
+                <li><a href="{% url 'music:profile' user.id %}">Profile</a></li>
+                {% endif %}
+                <li><a href="{% url 'music:index' %}">Home</a></li>
+                <li><a href="{% url 'music:albums' %}">Albums</a></li>
+                <li><a href="{% url 'music:contact' %}">Contact</a></li>
+                <li><a href="{% url 'music:about' %}">About</a></li>
+            </ul>
+
+            <!-- This Tag for message notifications -->
+            <!--<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>-->
+
+            <div class="search-bar">
+                <form role="search" method="get" action="{% url 'music:search' %}">
+                    <input type="text" placeholder="Artist name..." name="s" autocomplete="on">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+    </header>
+    {% include "messages.html" %}
+
+    {% block content %}
+
+    {% endblock %}
+
+
+    <footer>
+        <p>&copy; 2024 MusicVerse. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="{% url 'music:contact' %}">Contact Us</a>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Register</title>
+    <link rel="stylesheet" href="{% static 'css/authstyle.css' %}">
+</head>
+
+<body>
+    <div class="container">
+        {% include 'messages.html' %}
+        <h2>Welcome to Music App!</h2>
+        <div class="tabs">
+            <li>
+                <div data-tab="login"><a class="nav-link {% if request.resolver_match.view_name == 'accounts:login' %} active {% endif %}" href="{% url 'accounts:login' %}">Login</a></div>
+            </li>
+            <li>
+                <div data-tab="register"><a class="nav-link {% if request.resolver_match.view_name == 'accounts:signup' %} active {% endif %}" href="{% url 'accounts:signup' %}">Register</a></div>
+            </li>
+            <li>
+                <div data-tab="forgot_password"><a class="nav-link {% if request.resolver_match.view_name == 'accounts:forgot_password' %} active {% endif %}" href="{% url 'accounts:reset-password' %}">Forgot Password</a>
+                </div>
+            </li>
+        </div>
+        {% block content %}
+
+        {% endblock %}
+        <script src="{% static 'js/authscript.js'%}"></script>
+    </div>
+</body>
+
+</html>

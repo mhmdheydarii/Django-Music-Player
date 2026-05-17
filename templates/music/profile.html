@@ -1,0 +1,73 @@
+{% extends 'music/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<main>
+    <div id="sidebar">
+        <a href="{% url 'accounts:change-password' %}">Change Password</a>
+        <li>
+            <form method="post" action="{% url 'accounts:logout' %}">
+                {% csrf_token %}
+                <button class="btn like-button" type="submit">Logout</button>
+            </form>
+        </li>
+    </div>
+
+    <button id="menu-btn">Menu</button>
+    <section class="album-detail-section">
+        <div class="album-info">
+            <div class="album-text-content">
+                <h2>{{user.username}}</h2>
+            </div>
+        </div>
+        {% if music_like %}
+        <div class="track-list">
+            <h3>Liked Music</h3>
+            <ul>
+                <!-- Tracks will be listed here -->
+                {% for music in music_like %}
+                <li>
+                    <span>
+                        <h4>{{music.title}}</h4>
+                        <a class="category-button" href="{% url 'music:singer' slug=music.singer.slug %}">{{music.singer.name}}</a>
+                    </span>
+                    <div class="like-button-container">
+                        <div class="like-button-container">
+                            <form action="{% url 'music:like-music' music.pk %}?source=profile" method="post">
+                                {% csrf_token %}
+                                <button class="like-button" aria-label="لایک کردن آهنگ">
+                                    <svg class="liked-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path
+                                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.07a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 20.91l6.82-6.82 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                        </path>
+                                    </svg>
+                                    <span>{{music.like.all.count}}</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <audio preload="auto" controls>
+                        <source src="{{music.audio.url}}">
+                    </audio>
+                    <a href="{{music.audio.url}}" download class="download-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                            class="download-icon">
+                            <path
+                                d="M12 16.5l7.5-7.5.707.707-7.5 7.5-7.5-7.5.707-.707L11 16.5V4.5h1.5v12zM19.5 21h-15v-1.5h15V21z" />
+                        </svg>
+                        Download
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% else %}
+        <h3>You Don`t Have Any Liked Music ... </h3>
+        {% endif %}
+    </section>
+</main>
+
+{% endblock %}

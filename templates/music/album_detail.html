@@ -1,0 +1,159 @@
+{% extends 'music/base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+    {% if singer_music %}
+    <section class="album-detail-section">
+        <div class="album-info">
+            <img src="{{singer.image.url}}" alt="Album Cover">
+            <div class="album-text-content">
+                <h2>{{singer.name}}</h2>
+                _______
+                <p class="album-meta">Style : {{singer.category}}</p>
+            </div>
+        </div>
+        <div class="track-list">
+            <h3>Tracklist</h3>
+            <ul>
+                <!-- Tracks will be listed here -->
+                {% for music in singer_music %}
+                <li>
+                    <span>
+                        <h4>{{music.title}}</h4>
+                        <a class="category-button" href="{% url 'music:category' slug=music.category.slug %}">{{music.category.name}}</a>
+                    </span>
+                    <div class="like-button-container">
+                        {% if user.is_authenticated %}
+                        <form action="{% url 'music:like-music' music.pk %}?source=singer_detail" method="post">
+                            {% csrf_token %}
+                            <button class="like-button" aria-label="لایک کردن آهنگ">  
+                                {% if user in music.like.all %}
+                                <svg class="liked-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.07a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 20.91l6.82-6.82 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                    </path>
+                                </svg>
+                                {% else %}
+                                <svg class="like-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.07a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 20.91l6.82-6.82 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                    </path>
+                                </svg>
+                                {% endif %}
+                                <span>{{music.like.all.count}}</span>
+                            </button>
+                        </form>
+                        {% else %}
+                        <form action="{% url 'accounts:login' %}" method="post">
+                            {% csrf_token %}
+                            <button class="like-button" aria-label="لایک کردن آهنگ">
+                                <svg class="like-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.07a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 20.91l6.82-6.82 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                    </path>
+                                </svg>
+                                <span>{{music.like.all.count}}</span>
+                            </button>
+                        </form>
+                    {% endif %}
+                    </div>
+                    <audio preload="auto" controls>
+                        <source src="{{music.audio.url}}">
+                    </audio>
+                    <a href="{{music.audio.url}}" download class="download-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                            class="download-icon">
+                            <path
+                                d="M12 16.5l7.5-7.5.707.707-7.5 7.5-7.5-7.5.707-.707L11 16.5V4.5h1.5v12zM19.5 21h-15v-1.5h15V21z" />
+                        </svg>
+                        Download
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+    {% endif %}
+    {% if category_music %}
+    <section class="album-detail-section">
+        <div class="album-info">
+            <img src="{{category.image.url}}" alt="Album Cover">
+            <div class="album-text-content">
+                <h2>{{category.name}}</h2>
+                _______
+            </div>
+        </div>
+        <div class="track-list">
+            <h3>Tracklist</h3>
+            <ul>
+                <!-- Tracks will be listed here -->
+                {% for music in category_music %}
+                <li>
+                    <span>
+                        <h4>{{music.title}}</h4>
+
+                        <a class="category-button" href="{% url 'music:singer' slug=music.singer.slug %}">{{music.singer.name}}</a>
+                    </span>
+                    <div class="like-button-container">
+                        <div class="like-button-container">
+                        {% if user.is_authenticated %}
+                        <form action="{% url 'music:like-music' music.pk %}?source=category_detail" method="post">
+                            {% csrf_token %}
+                            <button class="like-button" aria-label="لایک کردن آهنگ">  
+                                {% if user in music.like.all %}
+                                <svg class="liked-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.07a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 20.91l6.82-6.82 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                    </path>
+                                </svg>
+                                {% else %}
+                                <svg class="like-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.07a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 20.91l6.82-6.82 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                    </path>
+                                </svg>
+                                {% endif %}
+                                <span>{{music.like.all.count}}</span>
+                            </button>
+                        </form>
+                        {% else %}
+                        <form action="{% url 'accounts:login' %}" method="post">
+                            {% csrf_token %}
+                            <button class="like-button" aria-label="لایک کردن آهنگ">
+                                <svg class="like-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.07a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 20.91l6.82-6.82 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                    </path>
+                                </svg>
+                                <span>{{music.like.all.count}}</span>
+                            </button>
+                        </form>
+                    </div>
+                    {% endif %}
+                    </div>
+                    <audio preload="auto" controls>
+                        <source src="{{music.audio.url}}">
+                    </audio>
+                    <a href="{{music.audio.url}}" download class="download-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                            class="download-icon">
+                            <path
+                                d="M12 16.5l7.5-7.5.707.707-7.5 7.5-7.5-7.5.707-.707L11 16.5V4.5h1.5v12zM19.5 21h-15v-1.5h15V21z" />
+                        </svg>
+                        Download
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+    {% endif %}
+</main>
+{% endblock %}

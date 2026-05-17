@@ -1,0 +1,229 @@
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0a0f1a 50%, #0a2a40 100%);
+    color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    width: 90%;
+    max-width: 380px;
+    background: rgba(14, 21, 37, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0, 76, 255, 0.3);
+    border: 1px solid rgba(10, 60, 255, 0.2);
+    padding: 30px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #4da3ff;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.tab {
+    flex: 1;
+    padding: 5px 2px;
+    cursor: pointer;
+    background: rgba(10, 15, 26, 0.5);
+    border: 1px solid rgba(10, 60, 255, 0.2);
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    color: #aaa;
+}
+
+.tab:hover {
+    background: #0077ff;
+    /* Blue background on hover */
+    color: #fff;
+    /* White text on hover */
+    font-weight: 700;
+    /* Bold text on hover */
+    box-shadow: 0 0 15px rgba(0, 119, 255, 0.4);
+    /* Subtle shadow on hover */
+}
+
+.tab.active {
+    background: #004cff;
+    /* Darker blue for active tab */
+    color: #fff;
+    /* White text for active tab */
+    box-shadow: 0 0 15px rgba(0, 76, 255, 0.5);
+    /* Stronger shadow for active tab */
+    font-weight: 700;
+    /* Bold text for active tab */
+}
+
+.form {
+    display: none;
+    /* Hidden by default */
+    animation: fadeIn 0.5s ease-out;
+}
+
+.form.active {
+    display: block;
+    /* Shown when active */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: calc(100% - 24px);
+    /* Adjust width considering padding */
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: none;
+    margin: 10px 0;
+    background: rgba(20, 30, 48, 0.7);
+    /* Slightly transparent dark background */
+    color: #fff;
+    /* White text */
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    /* Remove default outline */
+    border: 2px solid #0077ff;
+    /* Highlight border on focus */
+    box-shadow: 0 0 10px rgba(0, 119, 255, 0.4);
+    /* Subtle glow on focus */
+}
+
+input::placeholder {
+    color: #777;
+    /* Lighter color for placeholder text */
+}
+
+.btn {
+    width: 100%;
+    padding: 12px 15px;
+    background: linear-gradient(135deg, #0077ff, #004cff);
+    /* Gradient background */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #fff;
+    margin-top: 15px;
+    font-size: 17px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 76, 255, 0.4);
+    /* Shadow for the button */
+}
+
+.btn:hover {
+    background: linear-gradient(135deg, #00aaff, #0077ff);
+    /* Hover gradient */
+    box-shadow: 0 0 20px rgba(0, 160, 255, 0.6);
+    /* Stronger shadow on hover */
+}
+
+.link-text {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #4da3ff;
+    /* Link color */
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.link-text:hover {
+    color: #00aaff;
+    /* Hover link color */
+}
+
+/* Basic responsiveness */
+@media (max-width: 480px) {
+    .container {
+        padding: 25px;
+    }
+
+    .tab {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    .btn {
+        font-size: 16px;
+    }
+}
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  .container {
+    width: 100%;
+    margin: 0;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .menu {
+    display: none; /* اگر منو بزرگ داری مخفی کن */
+  }
+
+  .mobile-menu {
+    display: block; /* منوی مخصوص موبایل */
+  }
+}
+
+.messages {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.messages li {
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    color: #d3cdcd;
+    /* رنگ متن پیش‌فرض */
+    background-color: #1a4066;
+    /* رنگ پس‌زمینه پیش‌فرض */
+    border-color: #0686db;
+    /* رنگ حاشیه پیش‌فرض */
+}

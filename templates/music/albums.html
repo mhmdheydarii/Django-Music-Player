@@ -1,0 +1,37 @@
+{% extends 'music/base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+    <section class="page-header">
+        <h1>Our Music Collection</h1>
+        <p>Browse through our diverse range of albums.</p>
+    </section>
+
+    <section class="albums-list-section">
+        <div class="album-grid">
+            <!-- Albums will be listed here -->
+            {% for singer in singers %}
+            <div class="album-item">
+                <img src="{{singer.image.url}}" alt="Album Cover">
+                <h3>{{singer.name}}</h3>
+                <p>Style : {{singer.category}}</p>
+                <a href="{% url 'music:singer' singer.slug %}" class="btn btn-secondary">View Album</a>
+            </div>
+            {% endfor %}
+    </section>
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</main>
+
+{% endblock %}

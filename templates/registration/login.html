@@ -1,0 +1,13 @@
+{% extends 'registration/base.html' %}
+{% block content %}
+<!-- Login Form -->
+<form method="post">
+    {% csrf_token %}
+    <div id="login" class="form active">
+        <input type="text" name="username" placeholder="Username">
+        <input type="password" name="password" placeholder="Password">
+        {{form.captcha}}
+        <button class="btn" type="submit">Login</button>
+    </div>
+</form>
+{% endblock %}
