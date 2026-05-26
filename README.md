@@ -5,7 +5,7 @@ this is my music player website for dowanloding musics
 </p>
 
 <p align="center">
-<img src="./docs/music-player.png" width="700"/>
+<img src="docs/music_player.png" width="700"/>
 </p>
 
 <hr>
