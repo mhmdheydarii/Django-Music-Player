@@ -1,32 +1,44 @@
-<h1 align="center">Music Player Website</h1>
+## ⚙️ Installation (Windows)
 
-<p align="center">
-this is my music player website for dowanloding musics
-</p>
+### 1. Clone the repository
 
-<p align="center">
-<img src="docs/music_player.png" width="700"/>
-</p>
+git clone https://github.com/mhmdheydarii/Django-Music-Player.git
 
-<hr>
 
-## 📌 About
+### 2. Create a virtual environment
 
-...
+python -m venv .venv
 
-## ⚙️ Installation
 
-```bash
-git clone ...
-npm install
-npm run dev
+### 3. Activate the virtual environment
+
+**CMD**
+
+.venv\Scripts\activate
+
+
+**PowerShell**
+
+.\.venv\Scripts\Activate.ps1
+
+
+After activation, you should see something like:
+
+(.venv)
+
+
+at the beginning of your terminal line.
+
+### 5. Install dependencies
+
+pip install -r requirements.txt
+
+
+### 6. Run the project
+
+python manage.py makemigrations
+python manage.py migrate
+
+python manage.py runserver
 ```
 
-<details>
-<summary>Project Structure</summary>
-
-src/
-docs/
-components/
-
-</details>
