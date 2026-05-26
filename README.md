@@ -23,7 +23,7 @@ git clone https://github.com/mhmdheydarii/Django-Music-Player.git
 <h3>2. Navigate to the project directory</h3>
 
 ```bash
-cd django_blog_project
+cd django_music_player
 ```
 
 <br>
