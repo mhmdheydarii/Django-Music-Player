@@ -15,7 +15,7 @@
 <h3>1. Clone the repository</h3>
 
 ```bash
-git clone https://github.com/mhmdheydarii/Django-Blog-Project.git
+git clone https://github.com/mhmdheydarii/Django-Music-Player.git
 ```
 
 <br>
