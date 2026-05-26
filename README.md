@@ -1,4 +1,4 @@
-<h1 align="center">Music Player Wrbsite</h1>
+<h1 align="center">Music Player Website</h1>
 
 <p align="center">
 <img src="./docs/music_player.png" width="700"/>
