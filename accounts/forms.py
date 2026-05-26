@@ -18,7 +18,6 @@ class SignUpForm(UserCreationForm):
     
     def clean_email(self):
         email = self.cleaned_data.get("email")
-        username = self.cleaned_data.get("username")
         if email and User.objects.filter(email=email).exists():
             raise ValidationError("This email or username is already taken.")
         return email
