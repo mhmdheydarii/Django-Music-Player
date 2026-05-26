@@ -1,3 +1,8 @@
+<h1 align="center">Music Player Wrbsite</h1>
+
+<p align="center">
+<img src="./docs/music_player.png" width="700"/>
+</p>
 ## ⚙️ Installation (Windows)
 
 ### 1. Clone the repository
@@ -36,8 +41,8 @@ pip install -r requirements.txt
 
 ### 6. Run the project
 
-python manage.py makemigrations
-python manage.py migrate
+<p>python manage.py makemigrations</p>
+<p>python manage.py migrate</p>
 
 python manage.py runserver
 ```
