@@ -43,7 +43,7 @@ pip install -r requirements.txt
 
 <p>python manage.py makemigrations</p>
 <p>python manage.py migrate</p>
-
+```
 python manage.py runserver
 ```
 
