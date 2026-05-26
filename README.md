@@ -1,6 +1,32 @@
-# Django-Music-Player
-A simple music player backend built with Django.
-<h1>Setup</h1>
+<h1 align="center">Music Player Website</h1>
 
-<h3>clone the reposetory</h3>
-<p></p>
+<p align="center">
+this is my music player website for dowanloding musics
+</p>
+
+<p align="center">
+<img src="./docs/music-player.png" width="700"/>
+</p>
+
+<hr>
+
+## 📌 About
+
+...
+
+## ⚙️ Installation
+
+```bash
+git clone ...
+npm install
+npm run dev
+```
+
+<details>
+<summary>Project Structure</summary>
+
+src/
+docs/
+components/
+
+</details>
