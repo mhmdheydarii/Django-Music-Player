@@ -10,10 +10,12 @@ from django.urls import reverse, reverse_lazy
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.models import User
+from django.views.decorators.cache import cache_page
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils.decorators import method_decorator
 from .models import Music, Singer, Category
 from .forms import ContactForm
-
+import time
 # Create your views here.
 
 class IndexView(TemplateView):
@@ -89,13 +91,18 @@ class LikeMusicView(LoginRequiredMixin, View):
             return redirect("music:profile", pk=request.user.pk)
         
 
-
+@method_decorator(cache_page(60*15), name="dispatch")
 class ContactView(FormView):
     form_class = ContactForm
     template_name = "music/contact.html"
     success_url = reverse_lazy("music:contact")
+    
+    def get_context_data(self, **kwargs):
+        time.sleep(5)
+        return super().get_context_data(**kwargs)
 
     def form_valid(self, form):
+        
         try:
             form.save()
             messages.success(self.request, "You`r message has been sent successfully")

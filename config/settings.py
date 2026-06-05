@@ -155,3 +155,11 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "heidarimh14@example.com"  
 EMAIL_HOST_PASSWORD = "your_email_password" 
 DEFAULT_FROM_EMAIL = "your_email@example.com" 
+
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+    }
+}
