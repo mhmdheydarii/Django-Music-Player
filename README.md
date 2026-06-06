@@ -28,76 +28,19 @@ cd django_music_player
 
 <br>
 
-<h3>3. Create a virtual environment</h3>
-
-```bash
-python -m venv .venv
-```
-
-<br>
-
-<h3>4. Activate the virtual environment</h3>
-
-<p><b>CMD</b></p>
-
-```cmd
-.venv\Scripts\activate
-```
-
-<p><b>PowerShell</b></p>
-
-```powershell
-.\.venv\Scripts\Activate.ps1
-```
-
-<p>
-After activation, you should see something similar to:
-</p>
-
-```bash
-(.venv)
-```
-
-<p>
-at the beginning of your terminal line.
-</p>
-
-<br>
-
-<h3>5. Install dependencies</h3>
-
-<p>If the project includes a <code>requirements.txt</code> file:</p>
-
-```bash
-pip install -r requirements.txt
-```
-
-<br>
-
 <h3>6. Run the project</h3>
 
 
 ```bash
-python manage.py makemigrations
-```
-```bash
-python manage.py migrate
-```
-```bash
-python manage.py runserver
+docker compose up --build
 ```
 
-<hr>
-
-<details>
-<summary><b>❌ Deactivate Virtual Environment</b></summary>
-
-<br>
-
-To exit the virtual environment:
-
+<h3>7. Migrations </h3>
 ```bash
-deactivate
+docker compose exec backend python manage.py makemigrations
+```
+```bash
+docker compose exec backend python manage.py migrate
 ```
 
 </details>
