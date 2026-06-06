@@ -26,7 +26,9 @@ SECRET_KEY = config("SECRET_KEY", default="test")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", cast=bool, default=True)
 
-ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=lambda v: [item.strip() for item in v.split(",")], default="*")
+ALLOWED_HOSTS = config(
+    "ALLOWED_HOSTS", cast=lambda v: [item.strip() for item in v.split(",")], default="*"
+)
 
 
 # Application definition
@@ -85,8 +87,12 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": config("POSTGRES_DB"),
+        "USER": config("POSTGRES_USER"),
+        "PASSWORD": config("POSTGRES_PASSWORD"),
+        "HOST": config("POSTGRES_HOST"),
+        "PORT": config("PORT"),
     }
 }
 
@@ -148,13 +154,13 @@ LOGIN_URL = "accounts/login/"
 
 # SMTP for sending email
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.example.com"  
-EMAIL_PORT = 587  
-EMAIL_USE_TLS = True  
+EMAIL_HOST = "smtp.example.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 # EMAIL_USE_SSL = False # اگر از پورت 465 استفاده می‌کنید، این را True کنید و EMAIL_USE_TLS را False
-EMAIL_HOST_USER = "heidarimh14@example.com"  
-EMAIL_HOST_PASSWORD = "your_email_password" 
-DEFAULT_FROM_EMAIL = "your_email@example.com" 
+EMAIL_HOST_USER = "heidarimh14@example.com"
+EMAIL_HOST_PASSWORD = "your_email_password"
+DEFAULT_FROM_EMAIL = "your_email@example.com"
 
 
 CACHES = {

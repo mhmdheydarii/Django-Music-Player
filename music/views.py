@@ -91,7 +91,6 @@ class LikeMusicView(LoginRequiredMixin, View):
             return redirect("music:profile", pk=request.user.pk)
         
 
-@method_decorator(cache_page(60*15), name="dispatch")
 class ContactView(FormView):
     form_class = ContactForm
     template_name = "music/contact.html"
@@ -132,6 +131,6 @@ class SearchView(RedirectView):
             singer = queryset.first()         
             return redirect('music:singer', slug=singer.slug)
         elif queryset.count() == 0:   
-            messages.error(self.request, 'Please Enter The Correct Name!')  
+            messages.error(self.request, 'Please Enter a Correct Name!')  
             return redirect('music:index')
         return super().dispatch(request, *args, **kwargs)
