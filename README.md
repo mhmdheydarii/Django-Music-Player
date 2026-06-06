@@ -28,18 +28,15 @@ cd django_music_player
 
 <br>
 
-<h3>6. Run the project</h3>
+<h3>3. Run the project</h3>
 
 
 ```bash
 docker compose up --build
 ```
 
-<h3>7. Migrations </h3>
+<h3>4. Migrations </h3>
 
-```bash
-docker compose exec backend python manage.py makemigrations
-```
 ```bash
 docker compose exec backend python manage.py migrate
 ```
