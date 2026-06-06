@@ -36,6 +36,7 @@ docker compose up --build
 ```
 
 <h3>7. Migrations </h3>
+
 ```bash
 docker compose exec backend python manage.py makemigrations
 ```
