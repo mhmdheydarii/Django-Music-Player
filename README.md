@@ -34,7 +34,7 @@ cd django_music_player
 ```bash
 docker compose up --build
 ```
-
+<br>
 <h3>4. Migrations </h3>
 
 ```bash
