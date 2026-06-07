@@ -27,6 +27,17 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+  
+  cache:
+    image: redis:7.0.0
+    restart: always
+    ports:
+      - 6379:6379
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "3"
     
 
 volumes:

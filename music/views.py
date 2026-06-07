@@ -90,7 +90,7 @@ class LikeMusicView(LoginRequiredMixin, View):
         elif source_page == "profile":
             return redirect("music:profile", pk=request.user.pk)
         
-
+@method_decorator(cache_page(60 * 5), name='get')
 class ContactView(FormView):
     form_class = ContactForm
     template_name = "music/contact.html"
@@ -109,9 +109,8 @@ class ContactView(FormView):
             messages.error(self.request, "Somthing went wrong! Please try again.")
         return super().form_valid(form)
 
-
+@method_decorator(cache_page(60 * 5), name='get')
 class AboutView(TemplateView):
-
     template_name = "music/about.html"
 
 
