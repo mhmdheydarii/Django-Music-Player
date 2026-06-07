@@ -662,6 +662,8 @@ footer p {
     gap: 25px;
     justify-content: center;
     align-items: start;
+    margin: 0 auto;
+    width: 50%;
 }
 
 .category-item {
