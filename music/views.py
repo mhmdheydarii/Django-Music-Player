@@ -12,6 +12,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.models import User
 from django.views.decorators.cache import cache_page
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.cache import cache
 from django.utils.decorators import method_decorator
 from .models import Music, Singer, Category
 from .forms import ContactForm
@@ -21,11 +22,18 @@ import time
 class IndexView(TemplateView):
 
     template_name = "music/index.html"
-
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["singers"] = Singer.objects.filter(popularity=True)[:8]
-        context["categories"] = Category.objects.all()
+
+        singers = cache.get("homepage_singers")
+        
+        if singers is None:
+            singers = list(Singer.objects.filter(popularity=True)[:8])
+            cache.set("homepage_singers", singers, 300)
+
+        context["singers"] = singers
+        context["categories"] = cache.get_or_set("homepage_categories", lambda:list(Category.objects.all()), 300)
         return context
 
 
