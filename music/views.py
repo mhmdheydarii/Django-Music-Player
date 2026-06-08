@@ -33,7 +33,7 @@ class IndexView(TemplateView):
             cache.set("homepage_singers", singers, 300)
 
         context["singers"] = singers
-        context["categories"] = cache.get_or_set("homepage_categories", lambda:list(Category.objects.all()), 300)
+        context["categories"] = cache.get_or_set("homepage_categories", lambda:(list(Category.objects.all())), 300)
         return context
 
 
@@ -105,7 +105,6 @@ class ContactView(FormView):
     success_url = reverse_lazy("music:contact")
     
     def get_context_data(self, **kwargs):
-        time.sleep(5)
         return super().get_context_data(**kwargs)
 
     def form_valid(self, form):

@@ -11,7 +11,13 @@ class MusicAdmin(admin.ModelAdmin):
     filter_horizontal = ['like']
 
 admin.site.register(Music, MusicAdmin)
-admin.site.register(Category)
+
+
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ["id" ,"name"]
+
+admin.site.register(Category, CategoryAdmin)
+
 
 class SingerAdmin(admin.ModelAdmin):
     search_fields = ['name', 'popularity']
@@ -20,7 +26,6 @@ admin.site.register(Singer)
 
 
 class ContactAdmin(admin.ModelAdmin):
-
     list_display = ['name', 'subject', 'created_date']
     list_filter = ['name', 'created_date']
     search_fields = ['name', 'created_date']
