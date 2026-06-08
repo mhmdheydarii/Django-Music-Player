@@ -179,7 +179,3 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
-
-# app
-music/management/commands/category_images/
-music/management/commands/singer_images/
