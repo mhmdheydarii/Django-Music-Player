@@ -26,13 +26,7 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        singers = cache.get("homepage_singers")
-        
-        if singers is None:
-            singers = list(Singer.objects.filter(popularity=True)[:8])
-            cache.set("homepage_singers", singers, 300)
-
-        context["singers"] = singers
+        context["singers"] = cache.get_or_set("homepage_singers", lambda:(list(Singer.objects.filter(popularity=True)[:8])), 300)
         context["categories"] = cache.get_or_set("homepage_categories", lambda:(list(Category.objects.all())), 300)
         return context
 
