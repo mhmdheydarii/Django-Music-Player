@@ -19,7 +19,7 @@
         <img src="{{singer.image.url}}" alt="Album Cover">
         <h3>{{singer.name}}</h3>
         <p>Style : {{singer.category}}</p>
-        <a href="{% url 'music:singer' singer.slug %}" class="btn btn-secondary">View Album</a>
+        <a href="{% url 'music:singer' slug=singer.slug %}" class="btn btn-secondary">View Album</a>
       </div>
       {% endfor %}
     </div>
@@ -30,7 +30,7 @@
     <h2>Explore by Category</h2>
     <div class="category-grid">
     {% for category in categories %}
-      <a href="{% url 'music:category' category.slug %}" class="category-item-wrapper" data-animation="fadeInUp">
+      <a href="{% url 'music:category' slug=category.slug %}" class="category-item-wrapper" data-animation="fadeInUp">
         <div class="category-item">
           <div class="category-image-container">
             <img src="{{category.image.url}}" alt="Electronic Music">

@@ -17,7 +17,7 @@
             <h3>Tracklist</h3>
             <ul>
                 <!-- Tracks will be listed here -->
-                {% for music in singer_music %}
+                {% for music in singer_music.all %}
                 <li>
                     <span>
                         <h4>{{music.title}}</h4>

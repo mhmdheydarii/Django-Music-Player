@@ -25,9 +25,8 @@ class IndexView(TemplateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
         context["singers"] = cache.get_or_set("homepage_singers", lambda:(list(Singer.objects.filter(popularity=True)[:8])), 300)
-        context["categories"] = cache.get_or_set("homepage_categories", lambda:(list(Category.objects.all())), 300)
+        context["categories"] = cache.get_or_set("homepage_categories", lambda:(list(Category.objects.all())), 100)
         return context
 
 
@@ -39,7 +38,7 @@ class ProfileView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.get_object()
-        context["music_like"] = Music.objects.filter(like=user.id)
+        context["music_like"] = cache.get_or_set(f"music_like_{user.id}", lambda:(list(Music.objects.filter(like=user.id))), 300)
         return context 
 
 
