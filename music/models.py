@@ -4,11 +4,11 @@ from django.urls import reverse
 # Create your models here.
 
 class Music(models.Model):
-    singer = models.ForeignKey('Singer', on_delete=models.CASCADE, related_name='music')
+    singer = models.ForeignKey('Singer', on_delete=models.CASCADE, related_name='singer_music')
     title = models.CharField(max_length=300)
     audio = models.FileField(upload_to='Music')
-    category = models.ForeignKey('Category', on_delete=models.SET_NULL ,null=True, blank=True)
-    like = models.ManyToManyField(to=User, blank=True)
+    category = models.ForeignKey('Category', on_delete=models.SET_NULL ,null=True, blank=True, related_name="category_music")
+    like = models.ManyToManyField(to=User, blank=True, related_name="user_like")
     status = models.BooleanField(default=False)
     created_date = models.DateTimeField(auto_now_add=True)
     published_date = models.DateTimeField()

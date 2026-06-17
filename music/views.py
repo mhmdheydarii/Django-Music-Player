@@ -38,7 +38,7 @@ class ProfileView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.get_object()
-        context["music_like"] = cache.get_or_set(f"music_like_{user.id}", lambda:(list(Music.objects.filter(like=user.id))), 300)
+        context["music_like"] = Music.objects.filter(like=user.id)
         return context 
 
 
@@ -56,8 +56,15 @@ class SingerDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        singer = self.get_object()
-        context["singer_music"] = Music.objects.filter(singer=singer)
+        singer = self.object
+
+        cache_key = f"singer_music:{singer.id}"
+        musics = cache.get(cache_key)
+        if musics is None:
+            musics = list(singer.singer_music.all())
+            cache.set(cache_key, musics, 300)
+
+        context["singer_music"] = musics
         return context
 
 
@@ -68,8 +75,9 @@ class CategoryDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        category = self.get_object()
-        context["category_music"] = Music.objects.filter(category=category)
+        category = self.object
+        cache_key = f"category_music:{category.id}"
+        context["category_music"] = cache.get_or_set(cache_key, lambda:list(category.category_music.all()), 300)
         return context
 
 
