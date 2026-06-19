@@ -11,7 +11,7 @@
     <section class="albums-list-section">
         <div class="album-grid">
             <!-- Albums will be listed here -->
-            {% for singer in singers %}
+            {% for singer in object_list %}
             <div class="album-item">
                 <img src="{{singer.image.url}}" alt="Album Cover">
                 <h3>{{singer.name}}</h3>

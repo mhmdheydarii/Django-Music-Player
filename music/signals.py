@@ -13,8 +13,13 @@ def clear_singer_cache(sender, **kwargs):
 
 # Clear category cache on update
 @receiver([post_save, post_delete], sender=Category)
-def clear_category_cache(sender, **kwargs):
+def clear_category_homepage_cache(sender, **kwargs):
     cache.delete("homepage_categories")
+
+
+@receiver([post_save, post_delete], sender=Singer)
+def clear_singer_albume_cache(sender, **kwargs):
+    cache.delete("Singers_albume")
 
 
 # Clear singer music cache on update

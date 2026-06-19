@@ -47,7 +47,16 @@ class AlbumsView(ListView):
     model = Singer
     template_name = "music/albums.html"
     paginate_by = 16
-    context_object_name = "singers"
+    
+    def get_queryset(self):
+        cache_key = "singers_albume"
+        singers = cache.get(cache_key)
+
+        if singers is None:
+            singers = list(Singer.objects.all())
+            cache.set(cache_key, singers, 300)
+
+        return singers
 
 
 class SingerDetailView(DetailView):
@@ -61,6 +70,7 @@ class SingerDetailView(DetailView):
         cache_key = f"singer_music:{singer.id}"
         musics = cache.get(cache_key)
         if musics is None:
+            print("before cache")
             musics = list(singer.singer_music.all())
             cache.set(cache_key, musics, 300)
 
