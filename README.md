@@ -54,7 +54,6 @@ cd Django_Music_Player
 ```
 
 <br>
-<br>
 
 <h3>3. Configure environment variables</h3>
 
