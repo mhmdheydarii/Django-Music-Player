@@ -1,5 +1,5 @@
 <section style="max-width:700px; margin:auto; font-family:Arial, sans-serif; line-height:1.7; color:#333;">
-  <h1 style="text-align:center; color:#2c3e50;">Django Music Player</h1>
+  <h1 align="center">Django Music Player/h1>
 
   <p align="center">
   <img src="./docs/music_player.png" width="700"/>
